@@ -72,7 +72,14 @@
 
         function addToCart(product) {
             let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-            cart.push(product);
+            // Check if the product already exists in the cart
+            const existingProductIndex = cart.findIndex(item => item.id === product.id);
+            if (existingProductIndex > -1) {
+                // If it exists, you can choose to increase the quantity or keep it as is.
+                // For simplicity, we'll just keep it as is in this example.
+            } else {
+                cart.push(product); // Add the new product
+            }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             renderCart();
         }
